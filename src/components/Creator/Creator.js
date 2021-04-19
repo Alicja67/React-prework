@@ -18,7 +18,7 @@ class Creator extends React.Component {
   }
 
   handleChange = event => {
-    // console.log(event);
+    console.log(event);
     this.setState({
       value: event.target.value,
       visibleButtons: event.target.value.length > 0
@@ -38,8 +38,9 @@ class Creator extends React.Component {
   handleCancel = () => {
     this.setState({
       value: '',
-      visibleButtons: false
+      visibleButtons: false,
     });
+    window.confirm('Are you sure?');
   }
 
   render() {
