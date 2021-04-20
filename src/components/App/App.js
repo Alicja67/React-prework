@@ -28,8 +28,8 @@ class App extends React.Component {
             columns: [],
             image: 'http://uploads.kodilla.com/bootcamp/fer/11.react/space.png',
             description: 'Life is beautiful',
-          }
-        ]
+          },
+        ],
       }
     ));
   }
@@ -43,13 +43,13 @@ class App extends React.Component {
         <div className={styles.lists}>
           {this.state.lists.map(({key, ...listProps}) => (
             <List key={key} {...listProps} />
-            ))}
+          ))}
         </div>
         <div className={styles.creator}>
           <Creator text={settings.listCreatorText} action={title => this.addList(title)} />
         </div>
       </main>
-    )
+    );
   }
 }
 
