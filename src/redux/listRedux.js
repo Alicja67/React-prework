@@ -11,7 +11,7 @@ const createActionName = name => `app/${reducerName}/${name}`;
 export const ADD_LIST = createActionName('ADD_LIST');
 
 // action creators
-export const createActionAddList = payload => ({ payload: { ...payload, id: shortid.generate() }, type: ADD_LIST });
+export const createActionAddList = payload => ({ payload: { ...payload, id: shortid.generate(), image: 'http://uploads.kodilla.com/bootcamp/fer/11.react/space.png' }, type: ADD_LIST });
 
 // reducer
 export default function reducer(statePart = [], action = {}) {

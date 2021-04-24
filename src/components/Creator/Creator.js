@@ -41,7 +41,6 @@ class Creator extends React.Component {
       value: '',
       visibleButtons: false,
     });
-    window.confirm('Are you sure?');
   }
 
   render() {
@@ -55,7 +54,7 @@ class Creator extends React.Component {
         />
         <div className={styles.buttons + (this.state.visibleButtons ? ' ' + styles.buttonsShown : '')}>
           <Button onClick={this.handleOK}>OK</Button>
-          <Button onClick={this.handleCancel} variant='danger'>cancel</Button>
+          <Button onClick={this.handleCancel} variant='danger confirm'>cancel</Button>
         </div>
       </div>
     );
