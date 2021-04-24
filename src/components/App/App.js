@@ -2,7 +2,9 @@ import React from 'react';
 import styles from './App.scss';
 import List from '../List/ListContainer';
 import PropTypes from 'prop-types';
-// import Creator from '../Creator/Creator.js';
+import Creator from '../Creator/Creator.js';
+import {settings} from '../../data/dataStore';
+// import AppContainer from './AppContainer';
 
 
 class App extends React.Component {
@@ -11,27 +13,11 @@ class App extends React.Component {
     subtitle: PropTypes.node,
     description: PropTypes.string,
     lists: PropTypes.array,
+    addList: PropTypes.func,
   }
 
-  // addList(title){
-  //   this.setState(state => (
-  //     {
-  //       lists: [
-  //         ...state.lists,
-  //         {
-  //           key: state.lists.length ? state.lists[state.lists.length-1].key+1 : 0,
-  //           title,
-  //           columns: [],
-  //           image: 'http://uploads.kodilla.com/bootcamp/fer/11.react/space.png',
-  //           description: 'Life is beautiful',
-  //         },
-  //       ],
-  //     }
-  //   ));
-  // }
-  
   render() {
-    const {title, subtitle, lists} = this.props;
+    const {title, subtitle, lists, addList} = this.props;
     return (
       <main className={styles.component}>
         <h1 className={styles.title}>{title}</h1>
@@ -39,12 +25,12 @@ class App extends React.Component {
         {lists.map(listData => (
           <List key={listData.id} {...listData} />
         ))}
-        {/* <div>{lists.map(listData => (
+        <div>{lists.map(listData => (
           <List key={listData.id} {...listData} />
-        ))}</div> */}
-        {/* <div className={styles.creator}>
-          <Creator text={settings.listCreatorText} action={title => this.addList(title)} />
-        </div> */}
+        ))}</div>
+        <div className={styles.creator}>
+          <Creator text={settings.listCreatorText} action={addList} />
+        </div>
       </main>
     );
   }
