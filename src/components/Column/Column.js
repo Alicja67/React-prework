@@ -5,10 +5,9 @@ import Card from '../Card/Card.js';
 import Icon from '../Icon/Icon.js';
 import {settings} from '../../data/dataStore';
 import Creator from '../Creator/Creator.js';
+import {Droppable} from 'react-beautiful-dnd';
 
-
-
-const Column = ({title, icon, cards, addCard}) => {
+const Column = ({title, icon, cards, addCard, id}) => {
   return (
     <section className={styles.component}>
       <h3 className={styles.title}>{title}
@@ -16,10 +15,21 @@ const Column = ({title, icon, cards, addCard}) => {
           <Icon name={icon} />
         </span>
       </h3>
-      <div>{cards.map(cardData => (
-        <Card key={cardData.id} {...cardData} />
-      ))}
-      </div>
+      <Droppable droppableId={id}>
+        {provided => (
+          <div 
+            className={styles.cards}
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {cards.map(cardData => (
+              <Card key={cardData.id} {...cardData} />
+            ))}
+
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       <div className={styles.creator}>
         <Creator text={settings.cardCreatorText} action={addCard}/>
       </div>
@@ -32,6 +42,7 @@ Column.propTypes = {
   cards: PropTypes.array,
   icon: PropTypes.string,
   addCard: PropTypes.func,
+  id: PropTypes.string,
 };
 
 Column.defaultProps = {
