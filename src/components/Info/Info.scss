@@ -1,0 +1,19 @@
+@import '../../styles/settings.scss';
+
+.component {
+  position: relative;
+  min-height: ($base-size * 15);
+  background: $color-dark;
+  margin: 72px 0 ($base-size * 3) 0;
+}
+
+.title {
+  font-size: ($base-size * 1.5);
+  text-transform: uppercase;
+  color: $color-light;
+  margin: 36px 0;
+}
+
+.description {
+  margin: 36px 0;
+}
