@@ -1,58 +1,33 @@
 import React from 'react';
 import styles from './Home.scss';
-import ListLink from '../ListLink/ListLink';
 import PropTypes from 'prop-types';
 import Creator from '../Creator/Creator.js';
 import {settings} from '../../data/dataStore';
-import {DragDropContext} from 'react-beautiful-dnd';
+import ListLink from '../ListLink/ListLink';
+
 
 class Home extends React.Component {
   static propTypes = {
     title: PropTypes.node,
     subtitle: PropTypes.node,
     description: PropTypes.string,
-    lists: PropTypes.array,
     addList: PropTypes.func,
-    moveCard: PropTypes.func,
+    lists: PropTypes.array,
   }
 
   render() {
-    const {title, subtitle, lists, addList, moveCard} = this.props;
-    
-    const moveCardHandler = result => {
-      if(
-        result.destination
-        &&
-        (
-          result.destination.index != result.source.index
-          ||
-          result.destination.droppableId != result.source.droppableId
-        )
-      ){
-        moveCard({
-          id: result.draggableId,
-          dest: {
-            index: result.destination.index,
-            columnId: result.destination.droppableId,
-          },
-          src: {
-            index: result.source.index,
-            columnId: result.source.droppableId,
-          },
-        });
-      }
-    };
+    const {title, subtitle, addList, lists} = this.props;
     
     return (
       <main className={styles.component}>
         <h1 className={styles.title}>{title}</h1>
         <h2 className={styles.subtitle}>{subtitle}</h2>
-        <DragDropContext onDragEnd={moveCardHandler}>
-          {lists.map(listData => (
-            <ListLink key={listData.id} {...listData} />
-          ))}
-        </DragDropContext>
         <div className={styles.creator}>
+          <div>
+            {lists.map(listData => (
+              <ListLink key={listData.id} {...listData} />
+            ))}
+          </div>
           <Creator text={settings.listCreatorText} action={addList} />
         </div>
       </main>

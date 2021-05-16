@@ -5,44 +5,61 @@ import Card from '../Card/Card.js';
 import Icon from '../Icon/Icon.js';
 import {settings} from '../../data/dataStore';
 import Creator from '../Creator/Creator.js';
-import {Droppable} from 'react-beautiful-dnd';
+// import {Droppable} from 'react-beautiful-dnd';
 
-const Column = ({title, icon, cards, addCard, id}) => {
-  return (
-    <section className={styles.component}>
-      <h3 className={styles.title}>{title}
-        <span className={styles.icon}>
-          <Icon name={icon} />
-        </span>
-      </h3>
-      <Droppable droppableId={id}>
-        {provided => (
-          <div 
-            className={styles.cards}
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {cards.map(cardData => (
-              <Card key={cardData.id} {...cardData} />
-            ))}
+// const Column = ({title, icon, cards, addCard, id}) => {
+//   return (
+//     <section className={styles.component}>
+//       <h3 className={styles.title}>{title}
+//         <span className={styles.icon}>
+//           <Icon name={icon} />
+//         </span>
+//       </h3>
+//       <Droppable droppableId={id}>
+//         {provided => (
+//           <div 
+//             className={styles.cards}
+//             {...provided.droppableProps}
+//             ref={provided.innerRef}
+//           >
+//             {cards.map(cardData => (
+//               <Card key={cardData.id} {...cardData} />
+//             ))}
 
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-      <div className={styles.creator}>
-        <Creator text={settings.cardCreatorText} action={addCard}/>
-      </div>
-    </section>
-  );
-};
+//             {provided.placeholder}
+//           </div>
+//         )}
+//       </Droppable>
+//       <div className={styles.creator}>
+//         <Creator text={settings.cardCreatorText} action={addCard}/>
+//       </div>
+//     </section>
+//   );
+// };
+const Column = ({title, icon, cards, addCard}) => (
+  <section className={styles.component}>
+    <h3 className={styles.title}>{title}
+      <span className={styles.icon}>
+        <Icon name={icon} />
+      </span>
+    </h3>
+    <div className={styles.cards}>
+      {cards.map(cardData => (
+        <Card key={cardData.id} {...cardData} />
+      ))}
+    </div>
+    <div className={styles.creator}>
+      <Creator text={settings.cardCreatorText} action={addCard} />
+    </div>
+  </section>
+);
 
 Column.propTypes = {
   title: PropTypes.string.isRequired,
   cards: PropTypes.array,
   icon: PropTypes.string,
   addCard: PropTypes.func,
-  id: PropTypes.string,
+  // id: PropTypes.string,
 };
 
 Column.defaultProps = {
